@@ -1,12 +1,52 @@
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Tree from "./tree/tree";
 import * as serviceWorker from './serviceWorker';
+import {useState} from "react";
+const sourceData = [
+  {
+    text: '焦女士1',
+    value: '1',
+    children: [
+      {
+        text: '焦女士1.1', value: '1.1',
+        children: [
+          { text: '焦女士1.1.1', value: '1.1.1' , children: [
+              {text: '焦女士1.1.1.1', value: '1.1.1.1', children: [
+                  {text: '焦女士1.1.1.1.1', value: '1.1.1.1.1'}
+                ]}
+            ]},
+          { text: '焦女士1.1.2', value: '1.1.2' }
+        ]
+      },
+      {text: '焦女士1.2', value: '1.2'},
+    ]
+  },
+  {
+    text: '焦女士2',
+    value: '2',
+    children: [
+      {text: '焦女士2.1', value: '2.1'},
+      {text: '焦女士2.2', value: '2.2'},
+    ]
+  }
+]
 
+const TreeExample: React.FC = () => {
+  const [selectValues, setSelectValues] = useState<string[]>([''])
+  const onChange = (values: string[]) => {
+    setSelectValues(values)
+  }
+  return (
+    <div>
+      <Tree sourceData={sourceData} onChange={onChange} selected={selectValues}/>
+    </div>
+  )
+}
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TreeExample/>
   </React.StrictMode>,
   document.getElementById('root')
 );
