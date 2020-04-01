@@ -53,7 +53,9 @@ const DeepTree: React.FC<{item: SourceItem, level: number, onChangeItem: (values
     return arr
   }
   const onChangeItem = (values: string[]) => {
+    // 这里的values就是每次选中的元素
     const childrenValues = collectChildrenValues(item)
+    // 每次选中的元素和当前元素下的子元素进行共同元素比较
     const common = commonArr(values, childrenValues)
     if (common.length !== 0) {
       props.onChangeItem(Array.from(new Set(values.concat(item.value))))
